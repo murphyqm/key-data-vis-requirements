@@ -85,6 +85,12 @@ Kelleher, Christa, and Thorsten Wagener. 2011. “Ten Guidelines for Effective D
 Midway, Stephen R. 2020. “Principles of Effective Data Visualization.” Patterns (New York, N.Y.) 1 (9): 100141.
 
 Rougier, Nicolas P., Michael Droettboom, and Philip E. Bourne. 2014. “Ten Simple Rules for Better Figures.” PLoS Computational Biology 10 (9): e1003833.
+
+
+#### Other resources
+
+- [Berkeley LIbrary Data Visualisation library guide](https://guides.lib.berkeley.edu/data-visualization/about)
+- [Tableau documentation: Visual Best Practices](https://help.tableau.com/current/blueprint/en-us/bp_visual_best_practices.htm)
 """
 
 with col1:
@@ -424,11 +430,26 @@ There are also some larger-scale collected galleries that include multiple libra
 #### Articles on data visualisation
 
 While not specifically sharing Python libraries, general articles discussing great data visualisation can be a useful place to discover new kinds of plots and to inspire yourself; these sorts of posts can often be found on [company blogs](https://visme.co/blog/best-data-visualizations/)
+
+#### Research articles
+
+When keeping up-to-date on research in your field, make sure to save any impressive figures that you want to draw inspiration from at a later point!
+
+Some of the high-budget, flashier journals often have impressive graphics in their featured articles (for example, [Nature](https://www.nature.com/subjects/astronomy-and-astrophysics)). Look outside of your research area to discover new ways of plotting.
+"""
+
+types_of_plot = """
+
+- [From Data to Viz](https://www.data-to-viz.com/): a flowchart to help you find the most suitable plot for your data
+- [The Data Visualisation Catalogue](https://datavizcatalogue.com/): a non-code-based library of different information visualisation types
+- [Tableau documentation: Chart choice](https://help.tableau.com/current/blueprint/en-us/bp_visual_best_practices.htm#chart-choice)
 """
 
 with tab1:
 
     st.markdown(story_01)
+    with st.expander("Basic plot types"):
+        st.markdown(types_of_plot)
     with st.expander("Finding plot inspiration"):
         st.markdown(plot_inspiration)
 
