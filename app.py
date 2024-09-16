@@ -70,18 +70,62 @@ st.write(intro_text)
 
 col1, col2 = st.columns(2)
 
+pub_refs = """
+# Sources and inspiration
+
+A number of fantastic articles went into this resource. Please read these works: the content shared here is a much-abridged, simplified, shortened version of the content shared in the articles below.
+
+
+#### Bibliography
+
+Berinato, Scott. 2016. “Visualizations That Really Work.” Harvard Business Review, June 1, 2016. https://hbr.org/2016/06/visualizations-that-really-work.
+
+Kelleher, Christa, and Thorsten Wagener. 2011. “Ten Guidelines for Effective Data Visualization in Scientific Publications.” Environmental Modelling & Software: With Environment Data News 26 (6): 822–27.
+
+Midway, Stephen R. 2020. “Principles of Effective Data Visualization.” Patterns (New York, N.Y.) 1 (9): 100141.
+
+Rougier, Nicolas P., Michael Droettboom, and Philip E. Bourne. 2014. “Ten Simple Rules for Better Figures.” PLoS Computational Biology 10 (9): e1003833.
+"""
+
 with col1:
     with st.popover("Publications and references behind this tool"):
-        st.subheader("Managing dependencies")
+        st.markdown(pub_refs)
 
 package_references = """
+#### matplotlib
+![matplotlib logo](https://matplotlib.org/stable/_static/logo_dark.svg)
+
+J. D. Hunter, "Matplotlib: A 2D Graphics Environment", Computing in Science & Engineering, vol. 9, no. 3, pp. 90-95, 2007.
+
 #### seaborn
 
 ![seaborn logo](https://seaborn.pydata.org/_images/logo-wide-lightbg.svg)
 
 Waskom, M. L., (2021). seaborn: statistical data visualization. Journal of Open Source Software, 6(60), 3021, https://doi.org/10.21105/joss.03021.
 
+#### Plotly
 
+![Plotly logo](https://plotly.com/all_static/images/graphing_library_dark.svg)
+
+Plotly Technologies Inc. Collaborative data science. Montréal, QC, 2015. https://plot.ly.
+
+#### Streamlit
+
+![streamlit logo](https://docs.streamlit.io/logo.svg)
+
+Streamlit documentation, https://docs.streamlit.io/ 
+
+#### NumPy
+
+![numpy logo](https://numpy.org/images/logo.svg)
+
+Harris, C.R., Millman, K.J., van der Walt, S.J. et al. Array programming with NumPy. Nature 585, 357–362 (2020). DOI: 10.1038/s41586-020-2649-2.
+
+### pandas
+
+![pandas logo](https://pandas.pydata.org/static/img/pandas.svg)
+
+Data structures for statistical computing in python, McKinney, Proceedings of the 9th Python in Science Conference, Volume 445, 2010.
 """
 
 with col2:
@@ -338,9 +382,55 @@ with tab0:
         st.pyplot(fig6, use_container_width=True,)
     
 
+story_01 = """
+A figure can express an idea quickly, succinctly, and straightforwardly. However, it is important to know exactly what the message of the figure is, to avoid creating either pointless plots that don’t really tell much, or overly complex plots that try to tell far too much.
+
+#### Diagram first
+
+Try sketching out some ideas with pen and paper to explore how you might want to present the data. Exploratory data vis (discussed in the previous slide) is also useful for this.
+- What's the result you want to showcase? Can you explain it in a single sentence?
+- Do you need to show the **broad trends** or the **fine-grained details** to tell the story?
+    - These should usually be separated; if both are relevant, split them into two separate plots
+- What is the **simplest graph possible** that will communicate the meaning?
+
+#### Collaborate and share
+
+Share your plots from an early stage (perhaps even at the sketching-with-pen-and-paper stage) to see if your peers can quickly grasp the message you are hoping to convey. 
+
+>You know your data and your research very well; the patterns you are trying to highlight might be very obvious to you when you look at your figure, but completely hidden to someone looking at it for the first time.
+
+
+#### What sort of plots are even out there?
+
+When trying to figure out what kind of plot wll best help to visualise your message, it's useful to remind yourself of what kind of plots even exist!
+"""
+
+plot_inspiration = """
+
+#### Plotting library galleries and showcases
+
+A great place to find out whats available and what you can achieve is to scroll through some of the well-curated example galleries and tutorials published alongside many of the popular Python plotting libraries.
+
+Some notable examples include:
+
+- [Example gallery: seaborn](https://seaborn.pydata.org/examples/index.html)
+- [Plotly documentation](https://plotly.com/python/)
+- [Bokeh gallery: Topic guide](https://docs.bokeh.org/en/latest/docs/gallery.html)
+
+There are also some larger-scale collected galleries that include multiple libraries:
+- [The Python Graph Gallery](https://python-graph-gallery.com/)
+    - This gallery breaks up plots from a range of different libraries into topics such as distribution, correlation, ranking, evolution, and mapping
+
+#### Articles on data visualisation
+
+While not specifically sharing Python libraries, general articles discussing great data visualisation can be a useful place to discover new kinds of plots and to inspire yourself; these sorts of posts can often be found on [company blogs](https://visme.co/blog/best-data-visualizations/)
+"""
+
 with tab1:
 
-    st.write(f'To recreate the structure above, `cd` into your project directory (`) and run the following commands (by copying and pasting the block below into the terminal):')
+    st.markdown(story_01)
+    with st.expander("Finding plot inspiration"):
+        st.markdown(plot_inspiration)
 
 
 with tab2:
