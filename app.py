@@ -4,9 +4,28 @@ import seaborn as sns
 import plotly.express as px
 import numpy as np
 import pandas as pd
+from matplotlib import colormaps
+import matplotlib as mpl
+import requests
+
+import urllib.request
+from PIL import Image
 # from bokeh.plotting import figure
 #from bokeh.transform import linear_cmap, factor_cmap
 #from bokeh.palettes import Bokeh
+
+@st.cache_data
+def load_image_from_github(url):
+
+    img = np.array(Image.open(requests.get(url, stream=True).raw))
+    return img
+
+
+my_pall ={'orange': '#e66101',
+'pink': '#CA054D',
+'blue': '#1B98E0',
+'green':'#A4D4B4',
+'purple': '#5e3c99', }
 
 # data analysis
 penguins = sns.load_dataset("penguins").dropna() 
@@ -96,6 +115,7 @@ Rougier, Nicolas P., Michael Droettboom, and Philip E. Bourne. 2014. “Ten Simp
 - [from Data to Viz project](https://www.data-to-viz.com/)
 - [Principles of Data Visualization workshop notes](https://ucdavisdatalab.github.io/workshop_data_viz_principles/)
 - [What’s visual ‘encoding’ in data viz, and why is it important?](https://medium.com/@sophiewarnes/whats-visual-encoding-in-data-viz-and-why-is-it-important-7406bc88b4b4#:~:text=Encoding%20in%20data%20viz%20basically,trying%20to%20say%20or%20show.)
+- [University of Utah visualization design lab](https://vdl.sci.utah.edu/)
 """
 
 with col1:
@@ -484,6 +504,16 @@ We're going to look at two main factors as we discuss encoding data:
 
 ---
 
+Take some time to read through the UCDavis DataLab [Principles of Visual Perception](https://ucdavisdatalab.github.io/workshop_data_viz_principles/principles-of-visual-perception.html) section in their data visualisation workshop notes.
+
+They highlight a number of ways we can be misled by graphics, and how we can leverage the way our brains absorb visual information to build better data visualisations. For example, see the figure below:
+
+![circle visual trick](https://ucdavisdatalab.github.io/workshop_data_viz_principles/img/workshop_data_visualization_tricks_circles_bw.png)
+
+*Caption: Which inner circle is bigger? From [UCDavis Principles of data Visualisation workshop](https://ucdavisdatalab.github.io/workshop_data_viz_principles/principles-of-visual-perception.html#visual-magic-tricks)*
+
+---
+
 ## 1. Building truthful and non-misleading graphics
 
 > How effective are the different methods of encoding data shown below? What are some limitations or drawbacks of each option?
@@ -492,6 +522,13 @@ We're going to look at two main factors as we discuss encoding data:
 
 encoding_02 = """
 
+## 2. Building easy to read, efficient graphics
+
+We want people to be able to quickly absorb information from our plots.
+
+Thankfully, there's a whole host of research on how to best create visualisations that allow the audience to quickly absorb information.
+
+https://ucdavisdatalab.github.io/workshop_data_viz_principles/principles-of-visual-perception.html#stevens-psychophysical-power-law
 """
 
 encoding_refs = """
@@ -508,41 +545,219 @@ Wagemans, Johan, James H. Elder, Michael Kubovy, Stephen E. Palmer, Mary A. Pete
 
 """
 
+colour_choice = """
+Some things to keep in mind when picking a colour palette for your figure:
+
+1. Is the data ordered or not? Do you need to use a **qualitative**, **sequential** or **diverging** palette?
+2. How many levels need to be distinguishable?
+3. Will the plot be readable if you have a colour vision deficiency (i.e., colour blindness)?
+4. Will the plot be readable if printed in black and white?
+5. Is there enough contrast between the different colours that it will be legible on a range of different screens?
+
+You can avail of tools such as [ColorBrewer](https://colorbrewer2.org/) to pick a basic scientific palette. For more fine-grained control, try using [Chroma.js](https://gka.github.io/palettes/#/9|s|00429d,96ffea,ffffe0|ffffe0,ff005e,93003a|1|1) or [Colorgorical](http://vrl.cs.brown.edu/color) to generate palettes.
+
+If you already have a palette in mind, test it out with the fantastic [Viz Palette](https://projects.susielu.com/viz-palette) tool. This will allow you to export hex codes of colours to use in Python.
+
+Further reading:
+
+- [Your Friendly Guide to Colors in Data Visualisation](https://blog.datawrapper.de/colorguide/)
+- [Best Color Palettes for Scientific Figures and Data Visualizations](https://www.simplifiedsciencepublishing.com/resources/best-color-palettes-for-scientific-figures-and-data-visualizations#:~:text=How%20to%20Find%20the%20Best,and%20other%20color%20perception%20difficulties.)
+"""
+
+heatmaps_md = """
+There is a wealth of information and research into choosing the best heatmap to illustrate your data.
+
+[Crameri et al. (2020)](https://www.nature.com/articles/s41467-020-19160-7) highlight some of the issues with using poorly designed heatmaps:
+
+> Zones of danger, such as the boundaries of a hurricane track or current virus spread, are often based on uneven colour gradients to accentuate their importance. [...] Decisions based on data being ‘unfairly’ represented could produce, for instance, a Martian rover being sent over terrain that is too steep as the topography was inaccurately visualised, or a medical worker making an incomplete or inaccurate diagnosis based on uneven colour gradients.
+
+- You can see in the examples above how the `spring` heatmap squashes details at the extremes of the data, so you lose information near the max and minimum values.
+
+- While `jet` allows us to see detail in the extremes of the data, it also produces artifacts due to jumps in lightness between colours.
+
+- The `plasma` colourmap removes these jump artifacts, and allows us to see more in the extreme values than `spring` did.
+
+- The `turbo` colourmap has been designed as a replacement for [`jet`](https://research.google/blog/turbo-an-improved-rainbow-colormap-for-visualization/), where "where perceptual uniformity is not critical, but one still wants a high contrast, smooth visualization of the underlying data". This allows maxima and minima to be clearly seen, and doesn't produce artifical large jumps in brightness.
+
+See the [matplotlib documentation on colour maps for examples](https://matplotlib.org/stable/users/explain/colors/colormaps.html#lightness-of-matplotlib-colormaps).
+
+Other heatmap tools for Python include ["batlow": the Scientific colour map](https://www.fabiocrameri.ch/batlow/), [seaborn colour maps](https://seaborn.pydata.org/tutorial/color_palettes.html#sequential-color-palettes), [cmocean colour maps](https://matplotlib.org/cmocean/), [the SciCoMap package](https://github.com/ThomasBury/scicomap) and the related [blog pot](https://towardsdatascience.com/your-colour-map-is-bad-heres-how-to-fix-it-lessons-learnt-from-the-event-horizon-telescope-b82523f09469)
+"""
+
+cmaps = {}
+
+gradient = np.linspace(0, 1, 256)
+gradient = np.vstack((gradient, gradient))
+
+
+def plot_color_gradients(category, cmap_list):
+    # Create figure and adjust figure height to number of colormaps
+    nrows = len(cmap_list)
+    figh = 0.35 + 0.15 + (nrows + (nrows - 1) * 0.1) * 0.22
+    fig, axs = plt.subplots(nrows=nrows + 1, figsize=(6.4, figh))
+    fig.subplots_adjust(top=1 - 0.35 / figh, bottom=0.15 / figh,
+                        left=0.2, right=0.99)
+    axs[0].set_title(f'{category} colormaps', fontsize=14)
+
+    for ax, name in zip(axs, cmap_list):
+        ax.imshow(gradient, aspect='auto', cmap=mpl.colormaps[name])
+        ax.text(-0.01, 0.5, name, va='center', ha='right', fontsize=10,
+                transform=ax.transAxes)
+
+    # Turn off *all* ticks & spines, not just the ones with colormaps.
+    for ax in axs:
+        ax.set_axis_off()
+        
+
+    # Save colormap list for later.
+    cmaps[category] = cmap_list
+    return fig
+
 with tab2:
     
     st.markdown(encoding_01)
-    if "encoding" not in st.session_state:
-        st.session_state.encoding = "All the above"
-    st.radio("Pick an *encoding channel*:", key="encoding",
-             options=["Marker shape", "Marker colour", "Marker size", "All the above"])
+    with st.expander("Compare different encoding methods"):
+        if "encoding" not in st.session_state:
+            st.session_state.encoding = "All the above"
+        st.radio("Pick an *encoding channel*:", key="encoding",
+                options=["Marker shape", "Marker colour", "Marker size", "All the above"])
 
-    args_full = {"style":"Island", "hue":"Island", "size":"Island"}
-    args_style = {"style":"Island"}
-    args_hue = {"hue":"Island"}
-    args_size = {"size":"Island"}
+        args_full = {"style":"Island", "hue":"Island", "size":"Island"}
+        args_style = {"style":"Island"}
+        args_hue = {"hue":"Island"}
+        args_size = {"size":"Island"}
 
-    if st.session_state.encoding == "All the above":
-        args_ = args_full
-    elif st.session_state.encoding == "Marker shape":
-        args_ = args_style
-    elif st.session_state.encoding == "Marker colour":
-        args_ = args_hue
-    elif st.session_state.encoding == "Marker size":
-        args_ = args_size
-    else:
-        args_ = args_full
-    fig7 = plt.figure()
+        if st.session_state.encoding == "All the above":
+            args_ = args_full
+        elif st.session_state.encoding == "Marker shape":
+            args_ = args_style
+        elif st.session_state.encoding == "Marker colour":
+            args_ = args_hue
+        elif st.session_state.encoding == "Marker size":
+            args_ = args_size
+        else:
+            args_ = args_full
+        fig7 = plt.figure()
 
+        with sns.axes_style("ticks"):
+                sns.set_context("talk")
+                sns.set_palette("Set2")
+                ax = sns.scatterplot(data=Penguins, x="Body mass (g)", y="Flipper length (mm)", alpha=0.9, **args_ )
+                sns.despine()
+                sns.move_legend(ax, "upper left", bbox_to_anchor=(1, 1), title="Encoding")
+        st.pyplot(fig7, use_container_width=True,)
+    st.subheader("Implying order")
+    with st.expander("How might data encoding imply that the data is ordered?"):
+        st.write("Both these figures use the same randomly generated data.",
+                "What inferences might you draw from each of these plots? How is this effected by the encoding of the data?")
+        # Create a figure and axes, and set the figure size in inches
+
+        col_a, col_b = st.columns(2)
+        with col_a:
+            fig8, ax = plt.subplots(figsize=(7, 4))
+
+            # Random data
+            x = np.random.randn(50) + 2
+            y = np.random.randn(50) - 1
+
+            x1 = np.random.randn(50)
+            y1 = np.random.randn(50)
+
+            x2 = np.random.randn(50) - 2
+            y2 = np.random.randn(50) - 1
+
+            x3 = np.random.randn(50) + 2
+            y3 = np.random.randn(50) + 2
+
+            # Plot the data as a scatter plot
+            ax.scatter(x, y, label="Group A", c=my_pall["pink"], alpha=0.5, marker="*", s=130)
+            ax.scatter(x1, y1, label="Group B", c=my_pall["blue"], alpha=0.5, marker="X", s=130)
+            ax.scatter(x2, y2, label = "Group C", c=my_pall["orange"], alpha=0.5, s=120)
+            ax.scatter(x3, y3, label = "Group D", c=my_pall["purple"], alpha=0.5, s=110, marker="s")
+
+            # Set title and labels
+            ax.legend()
+            ax.set_title('Scatter Plot')
+            ax.set_xlabel('X')
+            ax.set_ylabel('Y')
+
+            ax.spines[["top", "right"]].set_visible(False)
+            st.pyplot(fig8, use_container_width=True,)
+
+        with col_b:
+
+            fig9, ax = plt.subplots(figsize=(7, 4))
+
+            new_pall = ["#cbc9e2",
+            "#9e9ac8",
+            "#756bb1",
+            "#54278f",]
+
+            # Plot the data as a scatter plot
+            ax.scatter(x, y, label="Group A", c=new_pall[0], alpha=0.8, s=200)
+            ax.scatter(x1, y1, label="Group B", c=new_pall[1], alpha=0.8, s=150)
+            ax.scatter(x2, y2, label = "Group C", c=new_pall[2], alpha=0.8, s=100)
+            ax.scatter(x3, y3, label = "Group D", c=new_pall[3], alpha=0.8, s=50, )
+
+            # Set title and labels
+            ax.legend()
+            ax.set_title('Scatter Plot')
+            ax.set_xlabel('X')
+            ax.set_ylabel('Y')
+
+            ax.spines[["top", "right"]].set_visible(False)
+            st.pyplot(fig9, use_container_width=True,)
+        st.write("*Caption: Randomly generated data using different shape, size and colour encoding.*")
+        st.write("Order can be implied by colour, size, position, angle (of marker). Ensure that you do not unintentionally imply that data are ordered when they are not.",
+                "When listing data sets in the legend, if there is no scientific basis for ordering them in a specific way, alphabetise them, so as not to unintentionally apply a ranking. For example, country names should be alphabetised inside alphabetised continent headers.")
+    with st.expander("Colour always means something"):
+        st.write("Be mindful when selecting colours for your plots.",
+                 "It's good to keep in mind what colour might represent to your audience, and if this is what you intended.",
+                 "For example, when building a plot discussing political party results,",
+                 "the colours red and blue will have different meanings and interpretation depending on the country.",
+                 "Similarly, using a continuous colour map, or varying saturation and intensity can imply that the data is ordered, as in the above example.")
+        st.markdown(colour_choice)
+        
+
+    st.subheader("Implying contrast")
+    st.write("Colour, markersize, location, opacity/saturation and labels can be used to emphasise contrast. Later in the course, we will also discuss how axes scaling can be used to artifically increase contrast between datapoints.")
+    st.write("Unintentional emphasis on contrast can most easily creep in when using continuous colour maps to illustrate data.")
+    with st.popover("Compare different colour maps (N.B. this will stay open as you scroll)"):
+        if "heatmap" not in st.session_state:
+            st.session_state.heatmap = "plasma"
+        if "ex_image" not in st.session_state:
+            st.session_state.ex_image = "https://www.leeds.ac.uk/images/resized/1200x600-0-0-1-80-ParkinsonBuilding_2.jpg"
+        st.radio("Choose a matplotlib heatmap:",key="heatmap",
+                options=["plasma","jet","turbo","spring"])
+    jpg_image =load_image_from_github("https://astropedia.astrogeology.usgs.gov/download/Mars/GlobalSurveyor/MOLA/thumbs/Mars_MGS_MOLA_DEM_mosaic_global_1024.jpg)")
+    image = jpg_image[:,:,0]
+    image = ((21229+8200)*(image/255)) - 8200
+    fig, ax = plt.subplots(layout='constrained')
     with sns.axes_style("ticks"):
-            sns.set_context("talk")
-            sns.set_palette("Set2")
-            ax = sns.scatterplot(data=Penguins, x="Body mass (g)", y="Flipper length (mm)", alpha=0.9, **args_ )
-            sns.despine()
-            sns.move_legend(ax, "upper left", bbox_to_anchor=(1, 1), title="Encoding")
-    st.pyplot(fig7, use_container_width=True,)
-    
-    st.divider()
+        sns.set_context("paper")
+        im = ax.imshow(image, cmap=st.session_state.heatmap, extent=[-180, 180, -90, 90])
+        fig.colorbar(im, orientation="horizontal", label="Elevation relative to areoid [M]")
+        ax.set_xlabel("Longitude")
+        ax.set_ylabel("Latitude")
+    st.pyplot(fig, use_container_width=True,)
+    st.write("Sometimes this is more easily seen with a photograph. Enter your photograph url below.")
+    ex_im = st.text_input("image URL", "https://www.leeds.ac.uk/images/resized/1200x600-0-0-1-80-ParkinsonBuilding_2.jpg")
+    new_im = load_image_from_github(str(ex_im))
+    image = new_im[:,:,0]
+    image = ((21229+8200)*(image/255)) - 8200
+    fig_new, ax = plt.subplots(layout='constrained')
+    with sns.axes_style("white"):
+        sns.set_context("paper")
+        im = ax.imshow(image, cmap=st.session_state.heatmap)
+        ax.set(xticklabels=[], yticklabels=[])
+        ax.tick_params(left=False,bottom=False)
+        sns.despine(left=True, bottom=True)
+    st.pyplot(fig_new, use_container_width=True,)
+    with st.expander("Picking heatmaps"):
+        st.write(heatmaps_md)
+    st.markdown(encoding_02)
 
+    st.divider()
     st.markdown(encoding_refs)
 
 
