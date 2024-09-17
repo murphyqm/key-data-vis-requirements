@@ -80,6 +80,8 @@ A number of fantastic articles went into this resource. Please read these works:
 
 Berinato, Scott. 2016. “Visualizations That Really Work.” Harvard Business Review, June 1, 2016. https://hbr.org/2016/06/visualizations-that-really-work.
 
+Franconeri, Steven L., Lace M. Padilla, Priti Shah, Jeffrey M. Zacks, and Jessica Hullman. 2021. “The Science of Visual Data Communication: What Works.” Psychological Science in the Public Interest: A Journal of the American Psychological Society 22 (3): 110–61.
+
 Kelleher, Christa, and Thorsten Wagener. 2011. “Ten Guidelines for Effective Data Visualization in Scientific Publications.” Environmental Modelling & Software: With Environment Data News 26 (6): 822–27.
 
 Midway, Stephen R. 2020. “Principles of Effective Data Visualization.” Patterns (New York, N.Y.) 1 (9): 100141.
@@ -89,8 +91,11 @@ Rougier, Nicolas P., Michael Droettboom, and Philip E. Bourne. 2014. “Ten Simp
 
 #### Other resources
 
-- [Berkeley LIbrary Data Visualisation library guide](https://guides.lib.berkeley.edu/data-visualization/about)
+- [Berkeley Library Data Visualisation library guide](https://guides.lib.berkeley.edu/data-visualization/about)
 - [Tableau documentation: Visual Best Practices](https://help.tableau.com/current/blueprint/en-us/bp_visual_best_practices.htm)
+- [from Data to Viz project](https://www.data-to-viz.com/)
+- [Principles of Data Visualization workshop notes](https://ucdavisdatalab.github.io/workshop_data_viz_principles/)
+- [What’s visual ‘encoding’ in data viz, and why is it important?](https://medium.com/@sophiewarnes/whats-visual-encoding-in-data-viz-and-why-is-it-important-7406bc88b4b4#:~:text=Encoding%20in%20data%20viz%20basically,trying%20to%20say%20or%20show.)
 """
 
 with col1:
@@ -454,9 +459,91 @@ with tab1:
         st.markdown(plot_inspiration)
 
 
+encoding_01 = """
+When discussing data visualisation, **data encoding** essentially means *how you translate the data into a visual element on a chart* ([Warnes, 2018](https://medium.com/@sophiewarnes/whats-visual-encoding-in-data-viz-and-why-is-it-important-7406bc88b4b4#:~:text=Encoding%20in%20data%20viz%20basically,trying%20to%20say%20or%20show.)). In her fantastic blog post, [Sophie Warnes](https://medium.com/@sophiewarnes/whats-visual-encoding-in-data-viz-and-why-is-it-important-7406bc88b4b4#:~:text=Encoding%20in%20data%20viz%20basically,trying%20to%20say%20or%20show.) describes data encoding as a set of rules to follow, giving the following logic:
+
+> *Every time <data changes in some way>, do <something visual>,*
+
+where the *something visual* is the encoding.
+
+Starting simply, lets consider a scatter plot. We can think about how we might change a point marker to encode the data. There are many different ways we can encode data in this setting, including but not limited to:
+- **Position**
+    - The *x* and *y* co-ordinates reflect the data
+- **Colour**
+    - Colour can be used to represent a continuous numerical value (colour map)
+    - Colour can be used to represent discrete or categorical data
+- **Shape**
+    - Marker shape could be used to represent categorical data or highlight specific points
+- **Size**
+    - Size could be used to represent a continuous numerical value or category
+
+We're going to look at two main factors as we discuss encoding data:
+
+##### 1. Truthful and non-misleading graphics
+##### 2. Easy to read, efficient graphics
+
+---
+
+## 1. Building truthful and non-misleading graphics
+
+> How effective are the different methods of encoding data shown below? What are some limitations or drawbacks of each option?
+
+"""
+
+encoding_02 = """
+
+"""
+
+encoding_refs = """
+
+**References**
+
+Berinato, Scott. 2016. “Visualizations That Really Work.” Harvard Business Review, June 1, 2016. https://hbr.org/2016/06/visualizations-that-really-work.
+
+Franconeri, Steven L., Lace M. Padilla, Priti Shah, Jeffrey M. Zacks, and Jessica Hullman. 2021. “The Science of Visual Data Communication: What Works.” Psychological Science in the Public Interest: A Journal of the American Psychological Society 22 (3): 110–61.
+
+Kelleher, Christa, and Thorsten Wagener. 2011. “Ten Guidelines for Effective Data Visualization in Scientific Publications.” Environmental Modelling & Software: With Environment Data News 26 (6): 822–27.
+
+Wagemans, Johan, James H. Elder, Michael Kubovy, Stephen E. Palmer, Mary A. Peterson, Manish Singh, and Rüdiger von der Heydt. 2012. “A Century of Gestalt Psychology in Visual Perception: I. Perceptual Grouping and Figure-Ground Organization.” Psychological Bulletin 138 (6): 1172–1217.
+
+"""
+
 with tab2:
     
-    st.write("The previous step created a file and folder layout for your project. Open up the new `pyproject.toml` file and paste the following code template into it:")
+    st.markdown(encoding_01)
+    if "encoding" not in st.session_state:
+        st.session_state.encoding = "All the above"
+    st.radio("Pick an *encoding channel*:", key="encoding",
+             options=["Marker shape", "Marker colour", "Marker size", "All the above"])
+
+    args_full = {"style":"Island", "hue":"Island", "size":"Island"}
+    args_style = {"style":"Island"}
+    args_hue = {"hue":"Island"}
+    args_size = {"size":"Island"}
+
+    if st.session_state.encoding == "All the above":
+        args_ = args_full
+    elif st.session_state.encoding == "Marker shape":
+        args_ = args_style
+    elif st.session_state.encoding == "Marker colour":
+        args_ = args_hue
+    elif st.session_state.encoding == "Marker size":
+        args_ = args_size
+    else:
+        args_ = args_full
+    fig7 = plt.figure()
+
+    with sns.axes_style("ticks"):
+            sns.set_context("talk")
+            sns.set_palette("Set2")
+            ax = sns.scatterplot(data=Penguins, x="Body mass (g)", y="Flipper length (mm)", alpha=0.9, **args_ )
+            sns.despine()
+            sns.move_legend(ax, "upper left", bbox_to_anchor=(1, 1), title="Encoding")
+    st.pyplot(fig7, use_container_width=True,)
+    
+    st.divider()
+
+    st.markdown(encoding_refs)
 
 
 with tab3:
@@ -475,3 +562,9 @@ with st.sidebar:
     "[*SWD7: Software development in Python*](https://arc.leeds.ac.uk/training/courses/swd7/) course run by the [Research Computing Team](https://arc.leeds.ac.uk/about/team/) at the University of Leeds.")
     st.write("Find out more about [Research Computing](https://arc.leeds.ac.uk/) at Leeds.")
     st.write("You can also get in contact with me directly by leaving a message [here](https://murphyqm.github.io/murphyqm/).")
+
+
+
+
+st.write(r"$\textsf{\scriptsize Authored by Dr Maeve Murphy Quinlan, University of Leeds Research Computing Team © Copyright 2024}$")
+st.write("[Research Computing Team](https://arc.leeds.ac.uk/about/team/) | [Research Computing Website](https://arc.leeds.ac.uk/)")
