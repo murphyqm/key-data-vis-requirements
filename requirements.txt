@@ -4,3 +4,6 @@ scipy
 seaborn
 streamlit
 altair
+plotly
+bokeh
+pandas
