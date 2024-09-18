@@ -7,6 +7,7 @@ import pandas as pd
 from matplotlib import colormaps
 import matplotlib as mpl
 import requests
+import scipy as sp
 
 import urllib.request
 from PIL import Image
@@ -555,11 +556,17 @@ As well as looking at the effect of the individual encoding of datapoints, we ne
 - **Similarity**
     - How similar objects are to each other
     - Using the encoding channels explained above for marker style to group points
-    - Use [this graphic](https://www.oreilly.com/library/view/designing-data-visualizations/9781449314774/ch04.html#use_this_table_of_common_visual_properti) to pick an appropriate channel for the number of discrete values/groups you need to identify
+        - Use [this graphic](https://www.oreilly.com/library/view/designing-data-visualizations/9781449314774/ch04.html#use_this_table_of_common_visual_properti) to pick an appropriate channel for the number of discrete values/groups you need to identify
 
 - **Connection**
+    - Whether data points are isolated or connected
+    - Points that are connected to each other (via a line) are perceived as related
+    - Line style, colour and opacity can be varied
 
 - **Enclosure**
+    - Whether points are encircled in a group or have a different background colour/shading in a region
+    - Points enclosed in a region are perceived as related
+    - Annotations can be added to enclosed regions
 
 For further information, please see [UCDavis DataLab Principles of Data Visualisation notes](https://ucdavisdatalab.github.io/workshop_data_viz_principles/principles-of-visual-perception.html#gestalt-principles), [Wagemans et al., 2012](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3482144/), and [Peterson and Berryhill, 2013](https://link.springer.com/article/10.3758/s13423-013-0460-x)
 
@@ -795,13 +802,151 @@ with tab2:
     st.markdown(encoding_refs)
 
 
-with tab3:
-    st.write("[Mkdocs](https://www.mkdocs.org/) is a simple and quick documentation building library that works well with GitHub and GitHub pages.")
+comp_01 = """
 
+"""
+with tab3:
+    st.write("We've looked at the data points in your plot. Now lets look at the box around those points: everything besides the data!")
+    fig10, ax = plt.subplots(figsize=(7, 4))
+    # Set title and labels
+    ax.set_title('Scatter Plot')
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    st.pyplot(fig10, use_container_width=True,)
+    st.write("*Caption: An empty Figure and axes object with no points plotted.*")
+    def loguniform(low=0, high=1, size=None):
+        return np.exp(np.random.uniform(low, high, size))
+    # Random data
+    x = np.random.randn(50) + 2
+    y = np.random.randn(50) - 1
+
+    x1 = np.random.randn(50)
+    y1 = np.random.randn(50)
+
+    x2 = np.random.randn(50) - 2
+    y2 = np.random.randn(50) - 1
+
+    x3 = np.random.randn(50) + 2
+    y3 = np.random.randn(50) + 2
+    x3l = loguniform(low=0, high=5, size=50)
+    y3l = loguniform(low=0, high=5, size=50)
+    
+    with st.expander("Axes labels"):
+        st.write("Ensure your figure axes are labelled and include units if relevant (almost always will be!)")
+    with st.expander("Axes scale"):
+        st.write("Choose a sensible scale for your dataset. This can include usin a log scale, or changing the limits (maximum and minimum values) of the axes.")
+        x_scale = st.radio("X axes scale", options=["linear", "log"])
+        y_scale = st.radio("Y axes scale", options=["linear", "log"])
+
+        fig_01, axs= plt.subplots(1, 2, figsize=(7, 4))
+        # Plot the data as a scatter plot
+        axs[0].scatter(x, y, label="Group A", c=my_pall["pink"], alpha=0.5, marker="*", s=130)
+        axs[0].scatter(x1, y1, label="Group B", c=my_pall["blue"], alpha=0.5, marker="X", s=130)
+        axs[0].scatter(x2, y2, label = "Group C", c=my_pall["orange"], alpha=0.5, s=120)
+        axs[0].scatter(x3l, y3l, label = "Weird", c=my_pall["purple"], alpha=0.5, s=110, marker="s")
+
+        # Set title and labels
+        axs[0].set_title('Scatter Plot 1')
+        axs[0].set_xlabel('X')
+        axs[0].set_ylabel('Y')
+
+        axs[0].spines[["top", "right"]].set_visible(False)
+
+        axs[1].scatter(x, y, label="Group A", c=my_pall["pink"], alpha=0.5, marker="*", s=130)
+        axs[1].scatter(x1, y1, label="Group B", c=my_pall["blue"], alpha=0.5, marker="X", s=130)
+        axs[1].scatter(x2, y2, label = "Group C", c=my_pall["orange"], alpha=0.5, s=120)
+        axs[1].scatter(x3, y3, label = "Weird", c=my_pall["purple"], alpha=0.5, s=110, marker="s")
+
+        # Set title and labels
+        axs[1].set_title('Scatter Plot 2')
+        axs[1].set_xlabel('X')
+        axs[1].set_ylabel('Y')
+
+        axs[1].spines[["top", "right"]].set_visible(False)
+
+        axs[0].set_yscale(y_scale)
+        axs[0].set_xscale(x_scale)
+        axs[1].set_yscale(y_scale)
+        axs[1].set_xscale(x_scale)
+        st.pyplot(fig_01, use_container_width=True,)
+    with st.expander("Placing the legend"):
+        st.write("In some of the examples with randomly generated data, you'll see that the Python library being used attempts to find the best location for the legend, where it overlaps the least number of points.",
+                 "It is a good idea to move the legend outside of the plot area and to one side in these situations.")
+        with sns.axes_style("ticks"):
+                sns.set_context("talk")
+                sns.set_palette("Set2")
+                ax = sns.scatterplot(data=Penguins, x="Body mass (g)", y="Flipper length (mm)", alpha=0.9, **args_full )
+                sns.despine()
+                sns.move_legend(ax, "upper left", bbox_to_anchor=(1, 1), title="Legend outside")
+        st.pyplot(fig7, use_container_width=True,)
+    with st.expander("Multiple panels"):
+        st.write("It can be helpful to split your plots into multiple panels to make it easier for your readers to absorb complex data.")
+        with sns.axes_style("ticks"):
+                sns.set_context("notebook")
+                sns.set_palette("Set2")
+                fig_02 = sns.relplot(data=Penguins, x="Body mass (g)", y="Flipper length (mm)", alpha=0.9, hue="Island", style="Sex")
+                sns.despine()
+                sns.move_legend(ax, "upper left", bbox_to_anchor=(1, 1),)
+        st.pyplot(fig_02, use_container_width=True,)
+
+
+        with sns.axes_style("ticks"):
+                sns.set_context("talk")
+                sns.set_palette("Set2")
+                fig_03 = sns.relplot(data=Penguins, x="Body mass (g)", y="Flipper length (mm)", alpha=0.9, hue="Island", style="Island",col="Sex")
+                sns.despine()
+                sns.move_legend(ax, "upper left", bbox_to_anchor=(1, 1),)
+        st.pyplot(fig_03, use_container_width=True,)
+        st.write("Align the axes you want to compare: stack plots vertically if you want to ocmpare the x axes; place them side by side if you want to focus on the y axes.")
+
+simplify_01 = """
+The simpler your plot the better.
+
+### Use the simplest and most basic plot possible to tell your story
+
+A lot of visual clutter and plot complexity comes from not having a solid idea of the message of the plot before you start plotting, and attempting to fit too much in. 
+
+### Remove clutter whenever possible
+
+**If your plot is confusing, try to clarify it by removing something, not adding extra labels and annotations.** Beware of chartjunk, like filled backgrounds and uneccessary grids.
+"""
 
 with tab4:
 
-    st.write("Once your repository contains a citation file, you can use this with the [GitHub-Zenodo integration](https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content) when generating DOIs for your release.")
+    st.markdown(simplify_01)
+
+    with sns.axes_style("darkgrid"):
+        sns.set_context("notebook")
+        sns.set_palette("Set2")
+        fig_02 = sns.lmplot(data=Penguins, x="Body mass (g)", y="Flipper length (mm)", hue="Island", markers=["o", "x", "*"])
+        # sns.move_legend(ax, "upper left", bbox_to_anchor=(1, 1),)
+
+    st.pyplot(fig_02, use_container_width=True,)
+    st.divider()
+    st.write("Sometimes this can be as simple as removing grid lines.")
+    with sns.axes_style("ticks"):
+        sns.set_context("notebook")
+        sns.set_palette("Set2")
+        fig_02 = sns.lmplot(data=Penguins, x="Body mass (g)", y="Flipper length (mm)", hue="Island", markers=["o", "x", "*"])
+        # sns.move_legend(ax, "upper left", bbox_to_anchor=(1, 1),)
+
+    st.pyplot(fig_02, use_container_width=True,)
+    st.divider()
+    st.write("Sometimes, it means splitting your plot into multiple panels and making each panel more simple. Don't pick a complicated and unusual statistical plot just because it looks interesting: does it actually serve the dataset and the message or result you want to convey? Might it confuse or mislead the reader?",
+             "Similar questions should be asked before building interactive or 3D visualisations. Does this actually help the reader to understand the message?")
+    def annotate(data, **kws):
+        r, p = sp.stats.pearsonr(data['Body mass (g)'], data['Flipper length (mm)'])
+        ax = plt.gca()
+        ax.text(.05, .8, 'r={:.2f}, p={:.2g}'.format(r, p),
+                transform=ax.transAxes)
+    with sns.axes_style("ticks"):
+        sns.set_context("talk")
+        sns.set_palette("Set2")
+        fig_03 = sns.lmplot(data=Penguins, x="Body mass (g)", y="Flipper length (mm)", col="Island", )
+        # sns.move_legend(ax, "upper left", bbox_to_anchor=(1, 1),)
+        fig_03.map_dataframe(annotate)
+
+    st.pyplot(fig_03, use_container_width=True,)
 
 
 with st.sidebar:
