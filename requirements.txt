@@ -7,6 +7,6 @@ seaborn
 streamlit
 altair
 plotly
-bokeh==2.4.3
+bokeh
 pandas
-plotly==5.24.1
+plotly
