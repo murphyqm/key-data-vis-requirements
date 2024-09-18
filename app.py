@@ -497,6 +497,8 @@ Starting simply, lets consider a scatter plot. We can think about how we might c
 - **Size**
     - Size could be used to represent a continuous numerical value or category
 
+> How many distinct values do you need to discriminate between? This can define the method of encoding that best suits your needs.
+
 We're going to look at two main factors as we discuss encoding data:
 
 ##### 1. Truthful and non-misleading graphics
@@ -524,11 +526,43 @@ encoding_02 = """
 
 ## 2. Building easy to read, efficient graphics
 
-We want people to be able to quickly absorb information from our plots.
+We want people to be able to quickly absorb information from our plots. Research generally handles complex topics, and the visualisations that we build are often trying to distil the results of months or years of complex work. We want our audience to simultaneously scan our figure, read labels and annotations, and absorb the salient points. This is a lot to juggle, and it's in our best interests to reduce the cognitive load and the strain on the visual working memory of our reader.
 
-Thankfully, there's a whole host of research on how to best create visualisations that allow the audience to quickly absorb information.
+Thankfully, there's a whole host of research on how to best create visualisations that allow the audience to quickly absorb information and to leverage intuitive shortcuts to make our plots more digestible.
 
-https://ucdavisdatalab.github.io/workshop_data_viz_principles/principles-of-visual-perception.html#stevens-psychophysical-power-law
+#### Pre-attentive attributes
+
+The [Tableau documentation](https://help.tableau.com/current/blueprint/en-us/bp_why_visual_analytics.htm) defines pre-attentive attributes as **"information we can process visually almost immediately"**, without thinking.
+
+These attributes include [length, width, orientation, size, shape, enclosure, position, grouping, colour hue, and colour intensity](https://help.tableau.com/current/blueprint/en-us/Img/bp_why_visual_analytics.png). Leveraging these encoding channels can help to make your visualisation more rapidly understandable.
+
+These attributes can be ranked according to the accuracy with which we can estimate their value: position and length are usually accurately estimated by the viewer (with sensible axes labels, scales, placement etc.), followed by angle and slope, then area, volume, colour, and density/saturation ([Mackinlay, 1986](https://dl.acm.org/doi/10.1145/22949.22950); [UCDavis DataLab](https://ucdavisdatalab.github.io/workshop_data_viz_principles/principles-of-visual-perception.html#perception-and-encodings)).
+
+#### Gestalt principles of grouping
+
+
+As well as looking at the effect of the individual encoding of datapoints, we need to consider the plot as a whole. Gestalt psychology looks at how people perceive things as a whole entity rather than as separate parts. Without the time to dive into the backgroiund of this field of psychology and address some of the assumptions and caveats (see [Table 2, Wagemans et al., 2012](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3482144/)), lets briefly look at some of the principles of grouping that can be applied to your figure making.
+
+- **Proximity**
+    - How near to each other objects are
+    - Our brain performs automatic clustering of points, and considers items close to each other as related
+    - This can be used...
+        - When arranging plots in a facet layout or a grid
+        - When arranging 1D plots such as bar charts
+        - When creating visualisations without numeric values on the *x* or *y* axes
+
+
+- **Similarity**
+    - How similar objects are to each other
+    - Using the encoding channels explained above for marker style to group points
+    - Use [this graphic](https://www.oreilly.com/library/view/designing-data-visualizations/9781449314774/ch04.html#use_this_table_of_common_visual_properti) to pick an appropriate channel for the number of discrete values/groups you need to identify
+
+- **Connection**
+
+- **Enclosure**
+
+For further information, please see [UCDavis DataLab Principles of Data Visualisation notes](https://ucdavisdatalab.github.io/workshop_data_viz_principles/principles-of-visual-perception.html#gestalt-principles), [Wagemans et al., 2012](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3482144/), and [Peterson and Berryhill, 2013](https://link.springer.com/article/10.3758/s13423-013-0460-x)
+
 """
 
 encoding_refs = """
@@ -646,6 +680,7 @@ with tab2:
                 sns.despine()
                 sns.move_legend(ax, "upper left", bbox_to_anchor=(1, 1), title="Encoding")
         st.pyplot(fig7, use_container_width=True,)
+    st.write("Refer to [this useful graphic](https://www.oreilly.com/library/view/designing-data-visualizations/9781449314774/ch04.html#use_this_table_of_common_visual_properti) when trying to decide what encoding channel to use.")
     st.subheader("Implying order")
     with st.expander("How might data encoding imply that the data is ordered?"):
         st.write("Both these figures use the same randomly generated data.",
@@ -756,7 +791,6 @@ with tab2:
     with st.expander("Picking heatmaps"):
         st.write(heatmaps_md)
     st.markdown(encoding_02)
-
     st.divider()
     st.markdown(encoding_refs)
 
