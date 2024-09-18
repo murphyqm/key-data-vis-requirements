@@ -688,6 +688,35 @@ with tab2:
                 sns.move_legend(ax, "upper left", bbox_to_anchor=(1, 1), title="Encoding")
         st.pyplot(fig7, use_container_width=True,)
     st.write("Refer to [this useful graphic](https://www.oreilly.com/library/view/designing-data-visualizations/9781449314774/ch04.html#use_this_table_of_common_visual_properti) when trying to decide what encoding channel to use.")
+    with st.expander("Size of marker as an encoding channel..."):
+        st.write("Size is an attribute that is easy to set to map onto a numerical value, to provide a third dimension to your visualisation.",
+                 "However, there are a few issues with this approach.")
+        st.subheader("1. We are not very good at estimating area")
+        st.write("It's difficult to accurately estimate the area of a marker, making it difficult for readers to decode our visualisation. This is also why it's best to [avoid pie-charts wherever possible](https://theconversation.com/heres-why-you-should-almost-never-use-a-pie-chart-for-your-data-214576#:~:text=Pie%20charts%20also%20do%20badly,of%20categories%20in%20one%20pie.&text=The%20tiny%20slices%2C%20lack%20of,make%20interpretation%20difficult%20for%20anyone.)")
+        st.subheader("2. It's not always clear or obvious the component of 'size' that maps onto the value, or how it scales")
+        st.write("Different Python plotting libraries tie different marker attributes to the idea of 'size' - marker diameter, radius, and area. This means that different marker shapes masy scale differently for different packages.")
+        st.write("Then depending on the scale of your data, you may have to use a multiple or factor to adjust the size relationship to make it visible in your plot. See below for the different effects this can have.")
+        x = [0,2,4,6,8,10,12,14,16,18]
+        s_exp = [20*2**n for n in range(len(x))]
+        s_square = [20*n**2 for n in range(len(x))]
+        s_linear = [20*n for n in range(len(x))]
+        fig_05, ax = plt.subplots()
+        ax.scatter(x,[1]*len(x),s=s_exp, label='$s=20 * 2^x$', lw=1, alpha=0.6, c=my_pall["pink"])
+        ax.scatter(x,[0]*len(x),s=s_square, label='$s=20 * x^2$', alpha=0.7, c=my_pall["blue"])
+        ax.scatter(x,[-1]*len(x),s=s_linear, label='$s=20 * x$', alpha=0.7, c=my_pall["orange"])
+
+        for i in x:
+            ax.text(i, -1.6, str(i), horizontalalignment='center', verticalalignment='center')
+        ax.axes.vlines(x=22, ymin=-1.7, ymax=1.6, colors="grey", linestyles=":", linewidths=2)
+        ax.set_ylim(-2,2)
+        ax.set_xlim(-0.5, 22)
+        ax.set_xlabel("X")
+        ax.legend(loc='center left', bbox_to_anchor=(1.05, 0.45), labelspacing=6, frameon=False, handletextpad=3.5)
+        ax.spines[:].set_visible(False)
+        ax.set_yticks([])
+        ax.set_xticks([])
+        st.pyplot(fig_05, use_container_width=True,)
+        st.write("*Caption: Size (s) in matplotlib library set as different mutliples of x value.*")
     st.subheader("Implying order")
     with st.expander("How might data encoding imply that the data is ordered?"):
         st.write("Both these figures use the same randomly generated data.",
