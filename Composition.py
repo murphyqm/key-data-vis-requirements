@@ -25,7 +25,7 @@ url_composition = "https://key-data-vis-requirements-composition.streamlit.app/"
 url_simplify = "https://key-data-vis-requirements-simplify.streamlit.app/"
 
 # next_page_url
-url_next = url_home
+url_next = url_simplify
 
 urls = [url_home, url_audience, url_story, url_encoding, url_composition, url_simplify]
 
@@ -321,7 +321,7 @@ with st.expander("Multiple panels"):
 
 st.text("")
 st.text("")
-pink_button(url_next, "Back to home &rarr;")
+pink_button(url_next, "Next section &rarr;")
 st.text("")
 st.text("")
 st.divider()
