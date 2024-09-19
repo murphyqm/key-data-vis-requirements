@@ -215,9 +215,8 @@ with col2:
         st.write("We also generated some random geological data to build a QFL ternary plot. This will regenerate when you reload the page, but will look something similar to this:")
         st.dataframe(geo_df)
 
-# nav_bar_2(urls, titles)
-# st.markdown("", unsafe_allow_html=False)
-nav_bar(urls, titles)
+
+# nav_bar(urls, titles)
 
 
 st.title("2. Story")
@@ -285,9 +284,9 @@ with st.expander("Basic plot types"):
 with st.expander("Finding plot inspiration"):
     st.markdown(plot_inspiration)
 
-st.text("")
-st.text("")
-pink_button(url_next, "Next section &rarr;")
+# st.text("")
+# st.text("")
+# pink_button(url_next, "Next section &rarr;")
 st.text("")
 st.text("")
 st.divider()

@@ -215,9 +215,9 @@ with col2:
         st.write("We also generated some random geological data to build a QFL ternary plot. This will regenerate when you reload the page, but will look something similar to this:")
         st.dataframe(geo_df)
 
-# nav_bar_2(urls, titles)
-# st.markdown("", unsafe_allow_html=False)
-nav_bar(urls, titles)
+# # nav_bar_2(urls, titles)
+# # st.markdown("", unsafe_allow_html=False)
+# nav_bar(urls, titles)
 st.title("4. Composition")
 
 comp_01 = """
@@ -319,9 +319,9 @@ with st.expander("Multiple panels"):
     st.pyplot(fig_03, use_container_width=True,)
     st.write("Align the axes you want to compare: stack plots vertically if you want to ocmpare the x axes; place them side by side if you want to focus on the y axes.")
 
-st.text("")
-st.text("")
-pink_button(url_next, "Next section &rarr;")
+# st.text("")
+# st.text("")
+# pink_button(url_next, "Next section &rarr;")
 st.text("")
 st.text("")
 st.divider()
