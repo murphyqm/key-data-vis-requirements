@@ -20,6 +20,6 @@ Each notebook in this section has a download arrow on the top right of the page,
 
 #### Exploratory data vis
 
-<a target="_blank" href="https://colab.research.google.com/github/murphyqm/key-data-vis-requirements/blob/main/docs/nbs/02_datavis_solutions.ipynb">
+<a target="_blank" href="https://colab.research.google.com/github/murphyqm/key-data-vis-requirements/blob/main/other-nbs/01b_datavis_solutions.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
