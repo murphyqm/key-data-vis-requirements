@@ -17,15 +17,15 @@ from PIL import Image
 
 
 # page urls
-url_home = "http://192.168.105.172:8501"
-url_audience = "http://192.168.105.172:8501"
-url_story = "http://192.168.105.172:8501"
-url_encoding = "http://192.168.105.172:8501"
-url_composition = "http://192.168.105.172:8501"
-url_simplify = "http://192.168.105.172:8501"
+url_home = "https://data-vis-101.streamlit.app/"
+url_audience = "https://key-data-vis-requirements-audience.streamlit.app/"
+url_story = "https://key-data-vis-requirements-story.streamlit.app/"
+url_encoding = "https://key-data-vis-requirements-encoding.streamlit.app/"
+url_composition = "https://key-data-vis-requirements-composition.streamlit.app/"
+url_simplify = "https://key-data-vis-requirements-simplify.streamlit.app/"
 
 # next_page_url
-url_next = url_audience
+url_next = url_composition
 
 urls = [url_home, url_audience, url_story, url_encoding, url_composition, url_simplify]
 
