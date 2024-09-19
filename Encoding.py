@@ -218,7 +218,7 @@ with col2:
 # # nav_bar_2(urls, titles)
 # # st.markdown("", unsafe_allow_html=False)
 # nav_bar(urls, titles)
-st.title("3. Encoding")
+
 
 encoding_01 = """
 When discussing data visualisation, **data encoding** essentially means *how you translate the data into a visual element on a chart* ([Warnes, 2018](https://medium.com/@sophiewarnes/whats-visual-encoding-in-data-viz-and-why-is-it-important-7406bc88b4b4#:~:text=Encoding%20in%20data%20viz%20basically,trying%20to%20say%20or%20show.)). In her fantastic blog post, [Sophie Warnes](https://medium.com/@sophiewarnes/whats-visual-encoding-in-data-viz-and-why-is-it-important-7406bc88b4b4#:~:text=Encoding%20in%20data%20viz%20basically,trying%20to%20say%20or%20show.) describes data encoding as a set of rules to follow, giving the following logic:
