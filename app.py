@@ -35,38 +35,20 @@ simplify_title = "5. Simplify"
 titles = [home_title, audience_title , story_title, encoding_title, composition_title, simplify_title]
 
 def click_button(url, text):
-     st.markdown(f'<a style="color:#ea388f;font-size:20px;font-style:bold;border-style: solid;border-radius:10px;padding:8px;text-decoration: none;border-width:2px;" href={url} target="_self">{text}</a>', unsafe_allow_html=True)
+     st.markdown(f'<a style="word-wrap:break-word;color:#ea388f;font-size:20px;font-style:bold; width: fit-content; border-style: none;padding:6px;text-decoration: none;border-width:2px;" href={url} target="_self">{text}</a>', unsafe_allow_html=True)
 
-def new_click_button(url, text):
-     st.markdown(f'<a href={url} target="_self">{text}</a>', unsafe_allow_html=True)
+def pink_button(url, text):
+     st.markdown(f'<a style="word-wrap:break-word;color:#ea388f;font-size:20px;font-style:bold; width: fit-content; border-style: solid;border-radius:10px;padding:6px;text-decoration: none;border-width:2px;text-align: center;" href={url} target="_self">{text}</a>', unsafe_allow_html=True)
+
 
 def nav_bar(urls, titles):
-    st.markdown("""
-            <style>
-                div[data-testid="column"] {
-                    width: fit-content !important;
-                    flex: unset;
-                }
-                div[data-testid="column"] * {
-                    width: fit-content !important;
-                }
-            </style>
-            """, unsafe_allow_html=True)
-
-    col1, col2, col3, col4, col5 = st.columns([1,1,1,1,1])
-
-    with col1:
+    with st.popover("Table of contents", use_container_width=True):
+        click_button(urls[0], titles[0])
         click_button(urls[1], titles[1])
-    with col2:
         click_button(urls[2], titles[2])
-    with col3:
         click_button(urls[3], titles[3])
-    with col4:
         click_button(urls[4], titles[4])
-    with col5:
         click_button(urls[5], titles[5])
-
-
 
 
 
@@ -229,12 +211,13 @@ with col2:
         st.dataframe(geo_df)
 
 st.subheader("The five themes to keep in mind include:")
+st.subheader("Audience | Story | Encoding | Composition | Simplify")
 nav_bar(urls, titles)
 
 st.text("")
 st.text("")
 
-st.write("Click one of the tabs above to start exploring.")
+st.write("Use the contents menu above to start exploring.")
 
 st.write("This webapp was developed by as part of the course materials for the",
 "[*SWD7: Software development in Python*](https://arc.leeds.ac.uk/training/courses/swd7/) course run by the [Research Computing Team](https://arc.leeds.ac.uk/about/team/) at the University of Leeds.")
