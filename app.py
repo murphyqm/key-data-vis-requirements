@@ -25,7 +25,7 @@ url_simplify = "https://key-data-vis-requirements-simplify.streamlit.app/"
 
 urls = [url_home, url_audience, url_story, url_encoding, url_composition, url_simplify]
 
-home_title = "Home"
+home_title = "0. Home"
 audience_title = "1. Audience"
 story_title = "2. Story"
 encoding_title = "3. Encoding"
@@ -34,8 +34,11 @@ simplify_title = "5. Simplify"
 
 titles = [home_title, audience_title , story_title, encoding_title, composition_title, simplify_title]
 
+# def click_button(url, text):
+#      st.markdown(f'<a style="word-wrap:break-word;color:#ea388f;font-size:20px;font-style:bold; width: fit-content; border-style: none;padding:6px;text-decoration: none;border-width:2px;" href={url} target="_self">{text}</a>', unsafe_allow_html=True)
+
 def click_button(url, text):
-     st.markdown(f'<a style="word-wrap:break-word;color:#ea388f;font-size:20px;font-style:bold; width: fit-content; border-style: none;padding:6px;text-decoration: none;border-width:2px;" href={url} target="_self">{text}</a>', unsafe_allow_html=True)
+     st.markdown(f'<a href={url} target="_self">{text}</a>', unsafe_allow_html=True)
 
 def pink_button(url, text):
      st.markdown(f'<a style="word-wrap:break-word;color:#ea388f;font-size:20px;font-style:bold; width: fit-content; border-style: solid;border-radius:10px;padding:6px;text-decoration: none;border-width:2px;text-align: center;" href={url} target="_self">{text}</a>', unsafe_allow_html=True)
