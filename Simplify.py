@@ -15,6 +15,7 @@ from PIL import Image
 #from bokeh.transform import linear_cmap, factor_cmap
 #from bokeh.palettes import Bokeh
 
+
 # page urls
 url_home = "http://192.168.105.172:8501"
 url_audience = "http://192.168.105.172:8501"
@@ -23,9 +24,12 @@ url_encoding = "http://192.168.105.172:8501"
 url_composition = "http://192.168.105.172:8501"
 url_simplify = "http://192.168.105.172:8501"
 
+# next_page_url
+url_next = url_audience
+
 urls = [url_home, url_audience, url_story, url_encoding, url_composition, url_simplify]
 
-home_title = "Home"
+home_title = "  Home"
 audience_title = "1. Audience"
 story_title = "2. Story"
 encoding_title = "3. Encoding"
@@ -35,37 +39,23 @@ simplify_title = "5. Simplify"
 titles = [home_title, audience_title , story_title, encoding_title, composition_title, simplify_title]
 
 def click_button(url, text):
-     st.markdown(f'<a style="color:#ea388f;font-size:20px;font-style:bold;border-style: solid;border-radius:10px;padding:8px;text-decoration: none;border-width:2px;" href={url} target="_self">{text}</a>', unsafe_allow_html=True)
+     st.markdown(f'<a style="word-wrap:break-word;color:#ea388f;font-size:20px;font-style:bold; width: fit-content; border-style: none;padding:6px;text-decoration: none;border-width:2px;" href={url} target="_self">{text}</a>', unsafe_allow_html=True)
+
+def pink_button(url, text):
+     st.markdown(f'<a style="word-wrap:break-word;color:#ea388f;font-size:20px;font-style:bold; width: fit-content; border-style: solid;border-radius:10px;padding:6px;text-decoration: none;border-width:2px;text-align: center;" href={url} target="_self">{text}</a>', unsafe_allow_html=True)
+
 
 def nav_bar(urls, titles):
-    st.markdown("""
-            <style>
-                div[data-testid="column"] {
-                    width: fit-content !important;
-                    flex: unset;
-                }
-                div[data-testid="column"] * {
-                    width: fit-content !important;
-                }
-            </style>
-            """, unsafe_allow_html=True)
-
-    col1, col2, col3, col4, col5 = st.columns([1,1,1,1,1])
-
-    with col1:
+    with st.popover("Table of contents", use_container_width=True):
+        click_button(urls[0], titles[0])
         click_button(urls[1], titles[1])
-    with col2:
         click_button(urls[2], titles[2])
-    with col3:
         click_button(urls[3], titles[3])
-    with col4:
         click_button(urls[4], titles[4])
-    with col5:
         click_button(urls[5], titles[5])
 
-
-
-
+def next_page(url_next):
+    pink_button(url_next, "Next section &rarr;")
 
 
 @st.cache_data
@@ -175,7 +165,7 @@ Rougier, Nicolas P., Michael Droettboom, and Philip E. Bourne. 2014. “Ten Simp
 """
 
 with col1:
-    with st.popover("Publications and references behind this tool"):
+    with st.popover("Publications and references behind this tool", use_container_width=True):
         st.markdown(pub_refs)
 
 package_references = """
@@ -216,7 +206,7 @@ Data structures for statistical computing in python, McKinney, Proceedings of th
 """
 
 with col2:
-    with st.popover("Python packages and datasets used"):
+    with st.popover("Python packages and datasets used", use_container_width=True):
         st.header("Python packages")
         st.markdown(package_references)
         st.header("Datasets")
@@ -225,22 +215,62 @@ with col2:
         st.write("We also generated some random geological data to build a QFL ternary plot. This will regenerate when you reload the page, but will look something similar to this:")
         st.dataframe(geo_df)
 
-st.subheader("The five themes to keep in mind include:")
+# nav_bar_2(urls, titles)
+# st.markdown("", unsafe_allow_html=False)
 nav_bar(urls, titles)
+st.title("5. Simplify")
+
+simplify_01 = """
+The simpler your plot the better.
+
+### Use the simplest and most basic plot possible to tell your story
+
+A lot of visual clutter and plot complexity comes from not having a solid idea of the message of the plot before you start plotting, and attempting to fit too much in. 
+
+### Remove clutter whenever possible
+
+**If your plot is confusing, try to clarify it by removing something, not adding extra labels and annotations.** Beware of chartjunk, like filled backgrounds and uneccessary grids.
+"""
+
+
+st.markdown(simplify_01)
+
+with sns.axes_style("darkgrid"):
+    sns.set_context("notebook")
+    sns.set_palette("Set2")
+    fig_02 = sns.lmplot(data=Penguins, x="Body mass (g)", y="Flipper length (mm)", hue="Island", markers=["o", "x", "*"])
+    # sns.move_legend(ax, "upper left", bbox_to_anchor=(1, 1),)
+
+st.pyplot(fig_02, use_container_width=True,)
+st.divider()
+st.write("Sometimes this can be as simple as removing grid lines.")
+with sns.axes_style("ticks"):
+    sns.set_context("notebook")
+    sns.set_palette("Set2")
+    fig_02 = sns.lmplot(data=Penguins, x="Body mass (g)", y="Flipper length (mm)", hue="Island", markers=["o", "x", "*"])
+    # sns.move_legend(ax, "upper left", bbox_to_anchor=(1, 1),)
+
+st.pyplot(fig_02, use_container_width=True,)
+st.divider()
+st.write("Sometimes, it means splitting your plot into multiple panels and making each panel more simple. Don't pick a complicated and unusual statistical plot just because it looks interesting: does it actually serve the dataset and the message or result you want to convey? Might it confuse or mislead the reader?",
+            "Similar questions should be asked before building interactive or 3D visualisations. Does this actually help the reader to understand the message?")
+def annotate(data, **kws):
+    r, p = sp.stats.pearsonr(data['Body mass (g)'], data['Flipper length (mm)'])
+    ax = plt.gca()
+    ax.text(.05, .8, 'r={:.2f}, p={:.2g}'.format(r, p),
+            transform=ax.transAxes)
+with sns.axes_style("ticks"):
+    sns.set_context("talk")
+    sns.set_palette("Set2")
+    fig_03 = sns.lmplot(data=Penguins, x="Body mass (g)", y="Flipper length (mm)", col="Island", )
+    # sns.move_legend(ax, "upper left", bbox_to_anchor=(1, 1),)
+    fig_03.map_dataframe(annotate)
+
+st.pyplot(fig_03, use_container_width=True,)
 
 st.text("")
 st.text("")
-
-st.write("Click one of the tabs above to start exploring.")
-
-st.write("This webapp was developed by as part of the course materials for the",
-"[*SWD7: Software development in Python*](https://arc.leeds.ac.uk/training/courses/swd7/) course run by the [Research Computing Team](https://arc.leeds.ac.uk/about/team/) at the University of Leeds.")
-st.write("Find out more about [Research Computing](https://arc.leeds.ac.uk/) at Leeds.")
-
-st.text("")
-st.text("")
-st.text("")
-st.text("")
+pink_button(url_next, "Next section &rarr;")
 st.text("")
 st.text("")
 st.divider()

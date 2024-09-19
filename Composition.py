@@ -15,6 +15,7 @@ from PIL import Image
 #from bokeh.transform import linear_cmap, factor_cmap
 #from bokeh.palettes import Bokeh
 
+
 # page urls
 url_home = "http://192.168.105.172:8501"
 url_audience = "http://192.168.105.172:8501"
@@ -23,9 +24,12 @@ url_encoding = "http://192.168.105.172:8501"
 url_composition = "http://192.168.105.172:8501"
 url_simplify = "http://192.168.105.172:8501"
 
+# next_page_url
+url_next = url_audience
+
 urls = [url_home, url_audience, url_story, url_encoding, url_composition, url_simplify]
 
-home_title = "Home"
+home_title = "  Home"
 audience_title = "1. Audience"
 story_title = "2. Story"
 encoding_title = "3. Encoding"
@@ -35,37 +39,23 @@ simplify_title = "5. Simplify"
 titles = [home_title, audience_title , story_title, encoding_title, composition_title, simplify_title]
 
 def click_button(url, text):
-     st.markdown(f'<a style="color:#ea388f;font-size:20px;font-style:bold;border-style: solid;border-radius:10px;padding:8px;text-decoration: none;border-width:2px;" href={url} target="_self">{text}</a>', unsafe_allow_html=True)
+     st.markdown(f'<a style="word-wrap:break-word;color:#ea388f;font-size:20px;font-style:bold; width: fit-content; border-style: none;padding:6px;text-decoration: none;border-width:2px;" href={url} target="_self">{text}</a>', unsafe_allow_html=True)
+
+def pink_button(url, text):
+     st.markdown(f'<a style="word-wrap:break-word;color:#ea388f;font-size:20px;font-style:bold; width: fit-content; border-style: solid;border-radius:10px;padding:6px;text-decoration: none;border-width:2px;text-align: center;" href={url} target="_self">{text}</a>', unsafe_allow_html=True)
+
 
 def nav_bar(urls, titles):
-    st.markdown("""
-            <style>
-                div[data-testid="column"] {
-                    width: fit-content !important;
-                    flex: unset;
-                }
-                div[data-testid="column"] * {
-                    width: fit-content !important;
-                }
-            </style>
-            """, unsafe_allow_html=True)
-
-    col1, col2, col3, col4, col5 = st.columns([1,1,1,1,1])
-
-    with col1:
+    with st.popover("Table of contents", use_container_width=True):
+        click_button(urls[0], titles[0])
         click_button(urls[1], titles[1])
-    with col2:
         click_button(urls[2], titles[2])
-    with col3:
         click_button(urls[3], titles[3])
-    with col4:
         click_button(urls[4], titles[4])
-    with col5:
         click_button(urls[5], titles[5])
 
-
-
-
+def next_page(url_next):
+    pink_button(url_next, "Next section &rarr;")
 
 
 @st.cache_data
@@ -175,7 +165,7 @@ Rougier, Nicolas P., Michael Droettboom, and Philip E. Bourne. 2014. “Ten Simp
 """
 
 with col1:
-    with st.popover("Publications and references behind this tool"):
+    with st.popover("Publications and references behind this tool", use_container_width=True):
         st.markdown(pub_refs)
 
 package_references = """
@@ -216,7 +206,7 @@ Data structures for statistical computing in python, McKinney, Proceedings of th
 """
 
 with col2:
-    with st.popover("Python packages and datasets used"):
+    with st.popover("Python packages and datasets used", use_container_width=True):
         st.header("Python packages")
         st.markdown(package_references)
         st.header("Datasets")
@@ -225,22 +215,113 @@ with col2:
         st.write("We also generated some random geological data to build a QFL ternary plot. This will regenerate when you reload the page, but will look something similar to this:")
         st.dataframe(geo_df)
 
-st.subheader("The five themes to keep in mind include:")
+# nav_bar_2(urls, titles)
+# st.markdown("", unsafe_allow_html=False)
 nav_bar(urls, titles)
+st.title("4. Composition")
+
+comp_01 = """
+
+"""
+
+st.write("We've looked at the data points in your plot. Now lets look at the box around those points: everything besides the data!")
+fig10, ax = plt.subplots(figsize=(7, 4))
+# Set title and labels
+ax.set_title('Scatter Plot')
+ax.set_xlabel('X')
+ax.set_ylabel('Y')
+st.pyplot(fig10, use_container_width=True,)
+st.write("*Caption: An empty Figure and axes object with no points plotted.*")
+def loguniform(low=0, high=1, size=None):
+    return np.exp(np.random.uniform(low, high, size))
+# Random data
+x = np.random.randn(50) + 2
+y = np.random.randn(50) - 1
+
+x1 = np.random.randn(50)
+y1 = np.random.randn(50)
+
+x2 = np.random.randn(50) - 2
+y2 = np.random.randn(50) - 1
+
+x3 = np.random.randn(50) + 2
+y3 = np.random.randn(50) + 2
+x3l = loguniform(low=0, high=5, size=50)
+y3l = loguniform(low=0, high=5, size=50)
+
+with st.expander("Axes labels"):
+    st.write("Ensure your figure axes are labelled and include units if relevant (almost always will be!)")
+with st.expander("Axes scale"):
+    st.write("Choose a sensible scale for your dataset. This can include usin a log scale, or changing the limits (maximum and minimum values) of the axes.")
+    x_scale = st.radio("X axes scale", options=["linear", "log"])
+    y_scale = st.radio("Y axes scale", options=["linear", "log"])
+
+    fig_01, axs= plt.subplots(1, 2, figsize=(7, 4))
+    # Plot the data as a scatter plot
+    axs[0].scatter(x, y, label="Group A", c=my_pall["pink"], alpha=0.5, marker="*", s=130)
+    axs[0].scatter(x1, y1, label="Group B", c=my_pall["blue"], alpha=0.5, marker="X", s=130)
+    axs[0].scatter(x2, y2, label = "Group C", c=my_pall["orange"], alpha=0.5, s=120)
+    axs[0].scatter(x3l, y3l, label = "Weird", c=my_pall["purple"], alpha=0.5, s=110, marker="s")
+
+    # Set title and labels
+    axs[0].set_title('Scatter Plot 1')
+    axs[0].set_xlabel('X')
+    axs[0].set_ylabel('Y')
+
+    axs[0].spines[["top", "right"]].set_visible(False)
+
+    axs[1].scatter(x, y, label="Group A", c=my_pall["pink"], alpha=0.5, marker="*", s=130)
+    axs[1].scatter(x1, y1, label="Group B", c=my_pall["blue"], alpha=0.5, marker="X", s=130)
+    axs[1].scatter(x2, y2, label = "Group C", c=my_pall["orange"], alpha=0.5, s=120)
+    axs[1].scatter(x3, y3, label = "Weird", c=my_pall["purple"], alpha=0.5, s=110, marker="s")
+
+    # Set title and labels
+    axs[1].set_title('Scatter Plot 2')
+    axs[1].set_xlabel('X')
+    axs[1].set_ylabel('Y')
+
+    axs[1].spines[["top", "right"]].set_visible(False)
+
+    axs[0].set_yscale(y_scale)
+    axs[0].set_xscale(x_scale)
+    axs[1].set_yscale(y_scale)
+    axs[1].set_xscale(x_scale)
+    st.pyplot(fig_01, use_container_width=True,)
+with st.expander("Placing the legend"):
+    st.write("In some of the examples with randomly generated data, you'll see that the Python library being used attempts to find the best location for the legend, where it overlaps the least number of points.",
+                "It is a good idea to move the legend outside of the plot area and to one side in these situations.")
+    fig7 = plt.figure()
+    with sns.axes_style("ticks"):
+            sns.set_context("talk")
+            sns.set_palette("Set2")
+            args_full = {"style":"Island", "hue":"Island", "size":"Island"}
+            ax = sns.scatterplot(data=Penguins, x="Body mass (g)", y="Flipper length (mm)", alpha=0.9, **args_full )
+            sns.despine()
+            sns.move_legend(ax, "upper left", bbox_to_anchor=(1, 1), title="Legend outside")
+    st.pyplot(fig7, use_container_width=True,)
+with st.expander("Multiple panels"):
+    st.write("It can be helpful to split your plots into multiple panels to make it easier for your readers to absorb complex data.")
+    with sns.axes_style("ticks"):
+            sns.set_context("notebook")
+            sns.set_palette("Set2")
+            fig_02 = sns.relplot(data=Penguins, x="Body mass (g)", y="Flipper length (mm)", alpha=0.9, hue="Island", style="Sex")
+            sns.despine()
+            sns.move_legend(ax, "upper left", bbox_to_anchor=(1, 1),)
+    st.pyplot(fig_02, use_container_width=True,)
+
+
+    with sns.axes_style("ticks"):
+            sns.set_context("talk")
+            sns.set_palette("Set2")
+            fig_03 = sns.relplot(data=Penguins, x="Body mass (g)", y="Flipper length (mm)", alpha=0.9, hue="Island", style="Island",col="Sex")
+            sns.despine()
+            sns.move_legend(ax, "upper left", bbox_to_anchor=(1, 1),)
+    st.pyplot(fig_03, use_container_width=True,)
+    st.write("Align the axes you want to compare: stack plots vertically if you want to ocmpare the x axes; place them side by side if you want to focus on the y axes.")
 
 st.text("")
 st.text("")
-
-st.write("Click one of the tabs above to start exploring.")
-
-st.write("This webapp was developed by as part of the course materials for the",
-"[*SWD7: Software development in Python*](https://arc.leeds.ac.uk/training/courses/swd7/) course run by the [Research Computing Team](https://arc.leeds.ac.uk/about/team/) at the University of Leeds.")
-st.write("Find out more about [Research Computing](https://arc.leeds.ac.uk/) at Leeds.")
-
-st.text("")
-st.text("")
-st.text("")
-st.text("")
+pink_button(url_next, "Next section &rarr;")
 st.text("")
 st.text("")
 st.divider()
