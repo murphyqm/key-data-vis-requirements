@@ -38,25 +38,36 @@ simplify_title = "5. Simplify"
 
 titles = [home_title, audience_title , story_title, encoding_title, composition_title, simplify_title]
 
+# def click_button(url, text):
+#      st.markdown(f'<a style="word-wrap:break-word;color:#ea388f;font-size:20px;font-style:bold; width: fit-content; border-style: none;padding:6px;text-decoration: none;border-width:2px;" href={url} target="_self">{text}</a>', unsafe_allow_html=True)
+
+# def pink_button(url, text):
+#      st.markdown(f'<a style="word-wrap:break-word;color:#ea388f;font-size:20px;font-style:bold; width: fit-content; border-style: solid;border-radius:10px;padding:6px;text-decoration: none;border-width:2px;text-align: center;" href={url} target="_self">{text}</a>', unsafe_allow_html=True)
+
+
+# def nav_bar(urls, titles):
+#     with st.popover("Table of contents", use_container_width=True):
+#         click_button(urls[0], titles[0])
+#         click_button(urls[1], titles[1])
+#         click_button(urls[2], titles[2])
+#         click_button(urls[3], titles[3])
+#         click_button(urls[4], titles[4])
+#         click_button(urls[5], titles[5])
+
+# def next_page(url_next):
+#     pink_button(url_next, "Next section &rarr;")
+
 def click_button(url, text):
-     st.markdown(f'<a style="word-wrap:break-word;color:#ea388f;font-size:20px;font-style:bold; width: fit-content; border-style: none;padding:6px;text-decoration: none;border-width:2px;" href={url} target="_self">{text}</a>', unsafe_allow_html=True)
+    pass
 
 def pink_button(url, text):
-     st.markdown(f'<a style="word-wrap:break-word;color:#ea388f;font-size:20px;font-style:bold; width: fit-content; border-style: solid;border-radius:10px;padding:6px;text-decoration: none;border-width:2px;text-align: center;" href={url} target="_self">{text}</a>', unsafe_allow_html=True)
-
+    pass
 
 def nav_bar(urls, titles):
-    with st.popover("Table of contents", use_container_width=True):
-        click_button(urls[0], titles[0])
-        click_button(urls[1], titles[1])
-        click_button(urls[2], titles[2])
-        click_button(urls[3], titles[3])
-        click_button(urls[4], titles[4])
-        click_button(urls[5], titles[5])
+    pass
 
 def next_page(url_next):
-    pink_button(url_next, "Next section &rarr;")
-
+    pass
 
 @st.cache_data
 def load_image_from_github(url):
@@ -434,9 +445,7 @@ with st.expander("Different versions of the same plot"):
             sns.move_legend(ax, "upper left", bbox_to_anchor=(1, 1))
     st.pyplot(fig6, use_container_width=True,)
 
-st.text("")
-st.text("")
-pink_button(url_next, "Next section &rarr;")
+
 st.text("")
 st.text("")
 st.divider()

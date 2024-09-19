@@ -216,8 +216,8 @@ with col2:
         st.dataframe(geo_df)
 
 # nav_bar_2(urls, titles)
-# st.markdown("", unsafe_allow_html=False)
-nav_bar(urls, titles)
+# # st.markdown("", unsafe_allow_html=False)
+# nav_bar(urls, titles)
 st.title("5. Simplify")
 
 simplify_01 = """
@@ -268,9 +268,9 @@ with sns.axes_style("ticks"):
 
 st.pyplot(fig_03, use_container_width=True,)
 
-st.text("")
-st.text("")
-pink_button(url_next, "Back to home &rarr;")
+# st.text("")
+# st.text("")
+# pink_button(url_next, "Back to home &rarr;")
 st.text("")
 st.text("")
 st.divider()
