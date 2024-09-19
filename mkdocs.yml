@@ -1,1 +1,61 @@
-site_name: My Docs
+site_name: SWD7 - Introduction to Data Visualisation in Python
+
+repo_url: https://github.com/ARCTraining/python-project-template
+repo_name: Python Project Template
+
+copyright: By University of Leeds Research Computing Team, Copyright &copy; 2024
+
+theme:
+  name: "material"
+  icon:
+    repo: fontawesome/brands/github
+  features:
+    - content.code.copy
+    - navigation.footer
+  palette:
+    # Palette toggle for light mode
+    - scheme: default
+      primary: deep purple
+      accent: deep purple
+      toggle:
+        icon: material/brightness-4
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - scheme: slate
+      primary: deep purple
+      accent: deep purple
+      toggle:
+        icon: material/brightness-7
+        name: Switch to light mode
+
+# plugins:
+#   - search
+#   - toggle-sidebar
+#   - awesome-pages
+#   - mermaid2:
+#       arguments:
+#         theme: 'base'
+
+markdown_extensions:
+  - pymdownx.arithmatex:
+        generic: true
+        block_tag: 'pre'
+  - pymdownx.details
+  - pymdownx.tilde
+  - pymdownx.snippets
+  - admonition
+  - pymdownx.blocks.tab
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+
+
+nav:
+  - Course content: index.md
+  - 1. Audience: 01-Audience.md
+  - 2. Story: 02-Story.md
+  - 3. Encoding: 03-Encoding.md
+  - 4. Composition: 04-Composition.md
+  - 5. Simplify: 05-Simplify.md
