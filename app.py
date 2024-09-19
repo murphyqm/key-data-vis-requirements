@@ -37,6 +37,9 @@ titles = [home_title, audience_title , story_title, encoding_title, composition_
 def click_button(url, text):
      st.markdown(f'<a style="color:#ea388f;font-size:20px;font-style:bold;border-style: solid;border-radius:10px;padding:8px;text-decoration: none;border-width:2px;" href={url} target="_self">{text}</a>', unsafe_allow_html=True)
 
+def new_click_button(url, text):
+     st.markdown(f'<a href={url} target="_self">{text}</a>', unsafe_allow_html=True)
+
 def nav_bar(urls, titles):
     st.markdown("""
             <style>
