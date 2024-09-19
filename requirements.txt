@@ -1,9 +1,9 @@
+streamlit
 matplotlib
 statsmodels
 numpy
 scipy
 seaborn
-streamlit
 altair
 plotly
 bokeh
