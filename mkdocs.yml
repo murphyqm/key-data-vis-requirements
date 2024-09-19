@@ -68,3 +68,4 @@ nav:
   - Practical Session:
     - How to use this resource: nbs/00_explanation.md
     - 1. Introduction notebook: nbs/01_datavis_solutions.ipynb
+    - 2. Exploratory data vis: nbs/02_datavis_solutions.ipynb
