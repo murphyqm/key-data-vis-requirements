@@ -67,4 +67,9 @@ nav:
     - 5. Simplify: 05-Simplify.md
   - Practical Session:
     - How to use this resource: nbs/00_explanation.md
+    - Building gridded plots: nbs/gridded_plots.md
     - 1. Introduction notebook: nbs/01_datavis_solutions.ipynb
+    - 2. Other libraries notebook: nbs/02_datavis_solutions.ipynb
+    - 3. Composition of multi-panel plots notebook: nbs/03_datavis_solutions.ipynb
+    - 4. Exploring heatmaps and legends: nbs/04_datavis_solutions.ipynb
+    - 5. Exploring a dataset: nbs/05_datavis_solutions.ipynb
