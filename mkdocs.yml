@@ -67,5 +67,6 @@ nav:
     - 5. Simplify: 05-Simplify.md
   - Practical Session:
     - How to use this resource: nbs/00_explanation.md
+    - Building gridded plots: nbs/gridded_plots.md
     - 1. Introduction notebook: nbs/01_datavis_solutions.ipynb
     - 2. Other libraries notebook: nbs/02_datavis_solutions.ipynb

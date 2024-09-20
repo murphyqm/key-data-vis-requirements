@@ -23,3 +23,17 @@ Each notebook in this section has a download arrow on the top right of the page,
 <a target="_blank" href="https://colab.research.google.com/github/murphyqm/key-data-vis-requirements/blob/main/other-nbs/01b_datavis_solutions.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
+
+
+### Session 2: Leveraging external libraries
+
+<a target="_blank" href="https://colab.research.google.com/github/murphyqm/key-data-vis-requirements/blob/main/docs/nbs/02_datavis_solutions.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+
+### Session 3: Composition of multi-panel and gridded plots
+
+<a target="_blank" href="https://colab.research.google.com/github/murphyqm/key-data-vis-requirements/blob/main/docs/nbs/03_datavis_solutions.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+
