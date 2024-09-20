@@ -14,7 +14,7 @@ Each notebook in this section has a download arrow on the top right of the page,
 
 #### Introduction notebook
 
-<a target="_blank" href="https://colab.research.google.com/github/murphyqm/key-data-vis-requirements/blob/main/docs/nbs/01_datavis_solutions.ipynb">
+<a target="_blank" href="https://colab.research.google.com/github/murphyqm/key-data-vis-requirements/blob/main/docs/nbs/01_datavis_exercises.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
@@ -34,6 +34,18 @@ Each notebook in this section has a download arrow on the top right of the page,
 ### Session 3: Composition of multi-panel and gridded plots
 
 <a target="_blank" href="https://colab.research.google.com/github/murphyqm/key-data-vis-requirements/blob/main/docs/nbs/03_datavis_solutions.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+
+### Session 4: Exploring heatmaps and legends
+
+<a target="_blank" href="https://colab.research.google.com/github/murphyqm/key-data-vis-requirements/blob/main/docs/nbs/04_datavis_solutions.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
+</a>
+
+### Session 5: Exploring a dataset
+
+<a target="_blank" href="https://colab.research.google.com/github/murphyqm/key-data-vis-requirements/blob/main/docs/nbs/05_datavis_solutions.ipynb">
   <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
 
