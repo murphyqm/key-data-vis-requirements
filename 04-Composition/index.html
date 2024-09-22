@@ -71,6 +71,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#axes-labels" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -356,6 +361,17 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    4. Composition
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -365,6 +381,59 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#axes-labels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Axes labels
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#axes-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      Axes scale
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#placing-the-legend" class="md-nav__link">
+    <span class="md-ellipsis">
+      Placing the legend
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multiple-panels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multiple panels
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -606,6 +675,50 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#axes-labels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Axes labels
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#axes-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      Axes scale
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#placing-the-legend" class="md-nav__link">
+    <span class="md-ellipsis">
+      Placing the legend
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multiple-panels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multiple panels
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -627,6 +740,23 @@
 
   <h1>4. Composition</h1>
 
+<p>We've looked at the data points in your plot. Now lets look at the box around those points: everything besides the data!</p>
+<p><img alt="An empty Figure and axes object" src="../image-1.png" /></p>
+<p>Caption: An empty Figure and axes object with no points plotted.</p>
+<h2 id="axes-labels">Axes labels</h2>
+<p>Ensure your figure axes are labelled and include units if relevant (almost always will be!)</p>
+<h2 id="axes-scale">Axes scale</h2>
+<p>Choose a sensible scale for your dataset. This can include using a log scale, or changing the limits (maximum and minimum values) of the axes.</p>
+<p><img alt="Scatter plot" src="../image-2.png" /></p>
+<p><img alt="Scatter plot" src="../image-3.png" /></p>
+<h2 id="placing-the-legend">Placing the legend</h2>
+<p>In some of the examples with randomly generated data, you'll see that the Python library being used attempts to find the best location for the legend, where it overlaps the least number of points. It is a good idea to move the legend outside of the plot area and to one side in these situations.</p>
+<p><img alt="Scatter plot" src="../image-4.png" /></p>
+<h2 id="multiple-panels">Multiple panels</h2>
+<p>It can be helpful to split your plots into multiple panels to make it easier for your readers to absorb complex data.</p>
+<p><img alt="Scatter plot" src="../image-5.png" /></p>
+<p><img alt="Scatter plot" src="../image-6.png" /></p>
+<p>Align the axes you want to compare: stack plots vertically if you want to ocmpare the x axes; place them side by side if you want to focus on the y axes.</p>
 <p><iframe
   src="https://key-data-vis-requirements-composition.streamlit.app/?embed=true"
   style="height: 450px; width: 100%;"
