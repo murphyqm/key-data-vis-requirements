@@ -28,6 +28,7 @@
     Interactivity is often not necessary outside of specific applications, and can be overused to hide other issues with a visualisation (such as not knowing the message or story it is supposed to tell), but in the case of exploratory data visualisation it's ok not to know that the message or story is yet!
 
     Quickly-built interactive visualisations using libraries such as plotly or bokeh can be a useful step in figuring out whether your plot should highlight the overall, large-scale patterns in the data, or if it should zoom in on the details.
+    See [this example](figs/example_1.html).
 
     ## Captions
     Captions do not have to be as formal when building an exploratory plot for yourself; however it's still useful to tag any figures with your notes. This could be by adding some markdown text in a Jupyter notebook after the figure (shown above in italics), or by adding info to the title. It's easy to forget what info you have gleaned from a particular plot, and noting it down like this can help save you time repeating yourself.
@@ -43,6 +44,7 @@
     While the plots might still be somewhat exploratory, and you may want to maintain some interaction for discussion, it's likely you'll want to have a better idea of the message or key result behind the plot. We'll discuss this more in Section 2: Story
 
     While in a publication, you would pick one plot that best highlights a particular pattern or feature, when putting together figures for discussion it can be useful to provide a few different but similar views to help discover the most useful way of presenting the data.
+    For example, [this figure](figs/example_2.html) and [this figure](figs/example_3.html) could be discussed at a meeting.
 
     ## Captions
     Again, captions are really useful for giving your collaborators a peek inside your thought process. They can be conversational and open ended, but should convey what message you think might be lurking in the data.
@@ -94,9 +96,4 @@
        - Make it large enough to be comfortably read from a distance
        - Be careful defining size and resolution to ensure it can be printed in large format
        - Depending on the context, you may need to play around with features such as transparency and colour palette to ensure your graphic is legible.
-<iframe
-  src="https://key-data-vis-requirements-audience.streamlit.app/?embed=true"
-  style="height: 450px; width: 100%;"
-></iframe>
 
-Note: if the app has gone to sleep (to conserve resources), please click "Fullscreen" to launch it in a new tab and then click "Wake up".

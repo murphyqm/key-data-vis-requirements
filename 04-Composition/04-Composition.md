@@ -33,9 +33,3 @@ It can be helpful to split your plots into multiple panels to make it easier for
 
 Align the axes you want to compare: stack plots vertically if you want to ocmpare the x axes; place them side by side if you want to focus on the y axes.
 
-<iframe
-  src="https://key-data-vis-requirements-composition.streamlit.app/?embed=true"
-  style="height: 450px; width: 100%;"
-></iframe>
-
-Note: if the app has gone to sleep (to conserve resources), please click "Fullscreen" to launch it in a new tab and then click "Wake up".

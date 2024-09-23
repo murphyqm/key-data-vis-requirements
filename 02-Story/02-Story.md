@@ -49,9 +49,3 @@ When keeping up-to-date on research in your field, make sure to save any impress
 
 Some of the high-budget, flashier journals often have impressive graphics in their featured articles (for example, [Nature](https://www.nature.com/subjects/astronomy-and-astrophysics)). Look outside of your research area to discover new ways of plotting.
 
-<iframe
-  src="https://key-data-vis-requirements-story.streamlit.app/?embed=true"
-  style="height: 450px; width: 100%;"
-></iframe>
-
-Note: if the app has gone to sleep (to conserve resources), please click "Fullscreen" to launch it in a new tab and then click "Wake up".

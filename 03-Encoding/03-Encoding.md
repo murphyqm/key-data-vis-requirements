@@ -95,9 +95,3 @@ See the [matplotlib documentation on colour maps for examples](https://matplotli
 
 Other heatmap tools for Python include ["batlow": the Scientific colour map](https://www.fabiocrameri.ch/batlow/), [seaborn colour maps](https://seaborn.pydata.org/tutorial/color_palettes.html#sequential-color-palettes), [cmocean colour maps](https://matplotlib.org/cmocean/), [the SciCoMap package](https://github.com/ThomasBury/scicomap) and the related [blog pot](https://towardsdatascience.com/your-colour-map-is-bad-heres-how-to-fix-it-lessons-learnt-from-the-event-horizon-telescope-b82523f09469)
 
-<iframe
-  src="https://key-data-vis-requirements-encoding.streamlit.app/?embed=true"
-  style="height: 450px; width: 100%;"
-></iframe>
-
-Note: if the app has gone to sleep (to conserve resources), please click "Fullscreen" to launch it in a new tab and then click "Wake up".
