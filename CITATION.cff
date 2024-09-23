@@ -1,0 +1,44 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: Introduction to data Visualisation in Python
+message: >-
+  A repository of teaching material for better research data
+  visualisation
+type: software
+authors:
+  - given-names: Maeve
+    family-names: Murphy Quinlan
+    name-particle: Maeve
+    email: mmurphyquinlan@gmail.com
+    affiliation: University of Leeds
+    orcid: 'https://orcid.org/0000-0003-2958-1008'
+identifiers:
+  - type: url
+    value: 'https://github.com/ARCTraining/swd7-notes/'
+    description: Repository URL
+  - type: url
+    value: 'https://github.com/murphyqm/key-data-vis-requirements'
+    description: Repository URL (2)
+repository-code: 'https://github.com/ARCTraining/swd7-notes/'
+url: 'https://arctraining.github.io/swd7-notes/'
+repository: 'https://github.com/murphyqm/key-data-vis-requirements'
+abstract: >-
+  This course is designed to introduce concepts relating to
+  good data visualisation, utilising packages available for
+  Python.
+
+
+  This course should be useful for anyone who works with
+  data and needs to visualise results. While the term
+  “scientific data visualisation” is used in this
+  documentation due to the sources we have collated, the
+  subject matter and example datasets should be applicable
+  to wider research areas than STEM.
+keywords:
+  - Python
+  - datavis
+  - research computing
+  - scientific data visualisation
+license: MIT
