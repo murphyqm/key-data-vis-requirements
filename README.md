@@ -6,6 +6,10 @@ This course should be useful for anyone who works with data and needs to visuali
 
 This course focuses on the production of static visualisations, and not interactive dashboards.
 
+If you use these materials, please cite us.
+
+[![DOI](https://zenodo.org/badge/57332436.svg)](https://zenodo.org/doi/10.5281/zenodo.6417585)
+
 # Delivery Guidelines
 
 This course contains a number of interactive elements; a devcontainer that can be launched on GitHub codespaces is provided, and links are given to lunch Jupyter notebooks in your Colab account.
