@@ -58,6 +58,7 @@ markdown_extensions:
 
 nav:
   - Course content: index.md
+  - Delivery guidelines: guidelines.md
   - Introduction: 00-Introduction.md
   - 5 Key Concepts:
     - 1. Audience: 01-Audience.md
