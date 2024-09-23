@@ -251,7 +251,7 @@ with sns.axes_style("ticks"):
     # sns.move_legend(ax, "upper left", bbox_to_anchor=(1, 1),)
 
 st.pyplot(fig_02, use_container_width=True,)
-st.divider()
+st.divider() 
 st.write("Sometimes, it means splitting your plot into multiple panels and making each panel more simple. Don't pick a complicated and unusual statistical plot just because it looks interesting: does it actually serve the dataset and the message or result you want to convey? Might it confuse or mislead the reader?",
             "Similar questions should be asked before building interactive or 3D visualisations. Does this actually help the reader to understand the message?")
 def annotate(data, **kws):

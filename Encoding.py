@@ -254,7 +254,7 @@ They highlight a number of ways we can be misled by graphics, and how we can lev
 ![circle visual trick](https://ucdavisdatalab.github.io/workshop_data_viz_principles/img/workshop_data_visualization_tricks_circles_bw.png)
 
 *Caption: Which inner circle is bigger? From [UCDavis Principles of data Visualisation workshop](https://ucdavisdatalab.github.io/workshop_data_viz_principles/principles-of-visual-perception.html#visual-magic-tricks)*
-
+ 
 ---
 
 ## 1. Building truthful and non-misleading graphics
